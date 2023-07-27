@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: security-service
+  datasource:
+    username: root
+    password: Ashish123
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/appointment
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+logging:
+  level:
+    sql: info
+    root: info
+server:
+  port: 8500

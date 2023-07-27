@@ -1,0 +1,22 @@
+# Configuration file for review-service
+server:
+  port: 8300
+spring:
+  application:
+    name: review-service
+  datasource:
+    username: root
+    password: Ashish123
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/appointment
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+  eureka:
+    client:
+      register-with-eureka: true
+      fetch-registry: false
+      service-url:
+        defaultZone: http://localhost:8761/eureka/

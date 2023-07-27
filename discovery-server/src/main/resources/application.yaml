@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: discovery-server
+server:
+  port: 8761
+
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: true
+
+
+
+logging:
+  level:
+    com.netflix.eureka: 'OFF'
+    org.springframework.cloud.netflix.eureka.server: 'DEBUG'

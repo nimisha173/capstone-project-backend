@@ -1,0 +1,52 @@
+# Configuration file for gateway-service
+server:
+  port: 8080
+  servlet:
+    context-path: /doc
+logging:
+  level:
+    org.springframework.cloud.gateway.route.RouteDefinitionLocator: INFO
+    org.springframework.cloud.gateway: TRACE
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
+spring:
+  application:
+    name: gateway-service
+  cloud:
+    gateway:
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowed-origins:
+              - http://localhost:5173/
+            allowed-headers:
+              - '*'
+            allowed-methods:
+              - GET
+              - POST
+              - DELETE
+              - PUT
+              - OPTIONS
+              - TRACE
+      routes:
+        - id: doctor-service
+          uri: lb://doctor-service
+          predicates:
+            - Path=/admin/**
+            - Method=GET,POST,PUT,DELETE
+        - id: appointment-service
+          uri: lb://appointment-service
+          predicates:
+            - Path=/appointment/**
+            - Method=GET,POST,DELETE
+        - id: review-service
+          uri: lb://review-service
+          predicates:
+            - Path=/review/**
+            - Method=GET,POST
